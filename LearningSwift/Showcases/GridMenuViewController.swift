@@ -25,11 +25,12 @@ class GridMenuViewController: UIViewController {
 
         let centerFrame = CGRectMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0, 0, 0)
         for _ in 0...7 {
-            let view = UIView()
-            view.frame = centerFrame
-            view.backgroundColor = UIColor.init(hue: CGFloat(drand48()), saturation: 0.7, brightness: 0.7, alpha: 1.0)
-            self.view.addSubview(view)
-            self.views.append(view)
+            let button = UIButton()
+            button.frame = centerFrame
+            button.backgroundColor = UIColor.init(hue: CGFloat(drand48()), saturation: 0.7, brightness: 0.7, alpha: 1.0)
+            button.addTarget(self, action: #selector(menuTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            self.view.addSubview(button)
+            self.views.append(button)
         }
 
         menuButton = MenuButton(frame: CGRectMake(0, 0, 66, 66))
@@ -47,6 +48,12 @@ class GridMenuViewController: UIViewController {
 
     func buttonTapped() {
         menuButton.popped ? show() : hide()
+    }
+
+    func menuTapped(button: UIButton) {
+        menuButton.popped = !menuButton.popped
+        self.buttonTapped()
+        self.view.backgroundColor = button.backgroundColor?.colorWithAlphaComponent(0.7)
     }
 
     func show() {
