@@ -130,7 +130,7 @@ class WSwipeViewController: UIViewController {
             block.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
 
             let label = UILabel(frame: CGRectMake(0, 0, 300, 20))
-            label.font = UIFont(name: "Avenir-Heavy", size: 14)
+            label.font = UIFont(name: "Avenir-Heavy", size: 18)
             label.textColor = UIColor.whiteColor()
             label.textAlignment = .Center
             block.content.addSubview(label)
@@ -149,9 +149,41 @@ class WSwipeViewController: UIViewController {
         rightBlock.center = CGPointMake(midBlock.center.x + blockWidth / sqrt(2.0), midBlock.center.y + blockWidth / sqrt(2.0))
         rightBlock.backgroundColor = rightSquare.backgroundColor
         rightBlockCenter = rightBlock.center
+
+        // direction button
+        let buttonWidth = leftSquare.center.x * sqrt(2.0)
+        let centerY = midCenter.y + width * sqrt(2.0)
+
+        let leftControl = UIView(frame: CGRectMake(0, 0, buttonWidth, buttonWidth))
+        leftControl.center = CGPointMake(0, centerY)
+        leftControl.backgroundColor = UIColor.blackColor()
+        leftControl.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
+        self.view.addSubview(leftControl)
+
+        let rightControl = UIView(frame: CGRectMake(0, 0, buttonWidth, buttonWidth))
+        rightControl.center = CGPointMake(self.view.frame.size.width, centerY)
+        rightControl.backgroundColor = UIColor.blackColor()
+        rightControl.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
+        self.view.addSubview(rightControl)
+
+        let leftButton = UIButton(type: .System)
+        leftButton.setImage(UIImage(named: "left.png"), forState: .Normal)
+        leftButton.tintColor = UIColor.whiteColor()
+        leftButton.frame = CGRectMake(0, 0, 30, 30)
+        leftButton.center = CGPointMake(23, centerY)
+        leftButton.addTarget(self, action: #selector(self.swipeLeft(_:)), forControlEvents: .TouchUpInside)
+        self.view.addSubview(leftButton)
+
+        let rightButton = UIButton(type: .System)
+        rightButton.setImage(UIImage(named: "right.png"), forState: .Normal)
+        rightButton.tintColor = UIColor.whiteColor()
+        rightButton.frame = CGRectMake(0, 0, 30, 30)
+        rightButton.center = CGPointMake(self.view.frame.size.width - 23, centerY)
+        rightButton.addTarget(self, action: #selector(self.swipeRight(_:)), forControlEvents: .TouchUpInside)
+        self.view.addSubview(rightButton)
     }
 
-    func swipeLeft(swipe: UISwipeGestureRecognizer) {
+    func swipeLeft(swipe: AnyObject) {
         self.view.userInteractionEnabled = false
 
         // squares
