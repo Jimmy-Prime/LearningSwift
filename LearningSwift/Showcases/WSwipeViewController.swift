@@ -10,12 +10,14 @@ import UIKit
 import pop
 
 class WSwipeViewController: UIViewController {
-    var squares: [UIView] = [UIView]()
+    var names: [String] = [String]()
+
+    var squares: [SlideCell] = [SlideCell]()
     var centers: [CGPoint] = [CGPoint]()
 
-    let leftBlock = UIView()
-    let midBlock = UIView()
-    let rightBlock = UIView()
+    let leftBlock = SlideCell()
+    let midBlock = SlideCell()
+    let rightBlock = SlideCell()
 
     var leftBlockCenter: CGPoint = CGPointZero
     var midBlockCenter: CGPoint = CGPointZero
@@ -25,6 +27,13 @@ class WSwipeViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.whiteColor()
+        self.view.clipsToBounds = true
+
+        self.names.appendContentsOf([
+            "8track",
+            "kkbox",
+            "soundcloud",
+            "spotify"])
 
         self.setupViews()
 
@@ -39,13 +48,13 @@ class WSwipeViewController: UIViewController {
 
     func setupViews() {
         // squares
-        let leftSquare3 = UIView()
-        let leftSquare2 = UIView()
-        let leftSquare = UIView()
-        let midSquare = UIView()
-        let rightSquare = UIView()
-        let rightSquare2 = UIView()
-        let rightSquare3 = UIView()
+        let leftSquare3 = SlideCell()
+        let leftSquare2 = SlideCell()
+        let leftSquare = SlideCell()
+        let midSquare = SlideCell()
+        let rightSquare = SlideCell()
+        let rightSquare2 = SlideCell()
+        let rightSquare3 = SlideCell()
 
         self.squares.appendContentsOf([
             leftSquare3,
@@ -64,6 +73,14 @@ class WSwipeViewController: UIViewController {
             view.backgroundColor = self.randomColor()
             view.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
             self.view.addSubview(view)
+
+            let index = Int(arc4random_uniform(UInt32(Int.max))) % self.names.count
+            view.tag = index
+
+            let image = UIImageView(image: UIImage(named: names[index]))
+            image.frame = CGRectMake(0, 0, 96, 96)
+            image.center = CGPointMake(75, 75)
+            view.content.addSubview(image)
         }
 
         midSquare.center = CGPointMake(self.view.center.x, 200)
@@ -104,22 +121,33 @@ class WSwipeViewController: UIViewController {
         let blockWidth: CGFloat = 300
         let blockSizeFrame = CGRectMake(0, 0, blockWidth, blockWidth)
 
-        midBlock.frame = blockSizeFrame
+        var blocks: [SlideCell] = [SlideCell]()
+        blocks.appendContentsOf([leftBlock, midBlock, rightBlock])
+
+        for index in 0 ... 2 {
+            let block = blocks[index]
+            block.frame = blockSizeFrame
+            block.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
+
+            let label = UILabel(frame: CGRectMake(0, 0, 300, 20))
+            label.font = UIFont(name: "Avenir-Heavy", size: 14)
+            label.textColor = UIColor.whiteColor()
+            label.textAlignment = .Center
+            block.content.addSubview(label)
+
+            label.text = self.names[self.squares[index+2].tag]
+        }
+
         midBlock.center = CGPointMake(self.view.center.x, midCenter.y + width / sqrt(2.0) + blockWidth / sqrt(2.0))
         midBlock.backgroundColor = midSquare.backgroundColor
-        midBlock.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
         midBlockCenter = midBlock.center
 
-        leftBlock.frame = blockSizeFrame
         leftBlock.center = CGPointMake(midBlock.center.x - blockWidth / sqrt(2.0), midBlock.center.y + blockWidth / sqrt(2.0))
         leftBlock.backgroundColor = leftSquare.backgroundColor
-        leftBlock.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
         leftBlockCenter = leftBlock.center
 
-        rightBlock.frame = blockSizeFrame
         rightBlock.center = CGPointMake(midBlock.center.x + blockWidth / sqrt(2.0), midBlock.center.y + blockWidth / sqrt(2.0))
         rightBlock.backgroundColor = rightSquare.backgroundColor
-        rightBlock.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
         rightBlockCenter = rightBlock.center
     }
 
@@ -140,16 +168,10 @@ class WSwipeViewController: UIViewController {
         }
 
         animations.last?.completionBlock = {(animation, finished) in
-            for index in 0 ..< self.squares.count - 1 {
-                let this = self.squares[index]
-                let next = self.squares[index+1]
-                this.backgroundColor = next.backgroundColor
-            }
-            self.squares.last?.backgroundColor = self.randomColor()
-
-            for index in 0 ..< self.centers.count {
-                self.squares[index].center = self.centers[index]
-            }
+            let view = self.squares.removeFirst()
+            self.squares.append(view)
+            view.backgroundColor = self.randomColor()
+            view.center = self.centers.last!
 
             self.view.userInteractionEnabled = true
         }
@@ -171,6 +193,15 @@ class WSwipeViewController: UIViewController {
 
             self.midBlock.center = self.midBlockCenter
             self.rightBlock.center = self.rightBlockCenter
+
+            let leftLabel = self.leftBlock.content.subviews.first as! UILabel
+            leftLabel.text = self.names[self.squares[2].tag]
+
+            let midLabel = self.midBlock.content.subviews.first as! UILabel
+            midLabel.text = self.names[self.squares[3].tag]
+
+            let rightLabel = self.rightBlock.content.subviews.first as! UILabel
+            rightLabel.text = self.names[self.squares[4].tag]
         }
     }
 
@@ -195,18 +226,10 @@ class WSwipeViewController: UIViewController {
         }
 
         animations.last?.completionBlock = {(animation, finished) in
-            for i in 1 ... self.squares.count - 1 {
-                // self.squares.count - 1 ... 1
-                let index = self.squares.count - i
-                let this = self.squares[index]
-                let prev = self.squares[index-1]
-                this.backgroundColor = prev.backgroundColor
-            }
-            self.squares.first?.backgroundColor = self.randomColor()
-
-            for index in 0 ..< self.centers.count {
-                self.squares[index].center = self.centers[index]
-            }
+            let view = self.squares.removeLast()
+            self.squares.insert(view, atIndex: 0)
+            view.backgroundColor = self.randomColor()
+            view.center = self.centers.first!
 
             self.view.userInteractionEnabled = true
         }
@@ -228,6 +251,15 @@ class WSwipeViewController: UIViewController {
 
             self.midBlock.center = self.midBlockCenter
             self.leftBlock.center = self.leftBlockCenter
+
+            let leftLabel = self.leftBlock.content.subviews.first as! UILabel
+            leftLabel.text = self.names[self.squares[2].tag]
+
+            let midLabel = self.midBlock.content.subviews.first as! UILabel
+            midLabel.text = self.names[self.squares[3].tag]
+
+            let rightLabel = self.rightBlock.content.subviews.first as! UILabel
+            rightLabel.text = self.names[self.squares[4].tag]
         }
     }
 

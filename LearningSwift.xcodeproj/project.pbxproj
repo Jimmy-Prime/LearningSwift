@@ -18,6 +18,11 @@
 		4B62BF801D6C01F2000D2744 /* GridMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B62BF7F1D6C01F2000D2744 /* GridMenuViewController.swift */; };
 		4B62BF821D6C0275000D2744 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B62BF811D6C0275000D2744 /* MenuButton.swift */; };
 		4B6F53741D6EF0EE0015DBF0 /* WSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6F53731D6EF0EE0015DBF0 /* WSwipeViewController.swift */; };
+		4B6F537B1D7421790015DBF0 /* 8track.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B6F53771D7421790015DBF0 /* 8track.png */; };
+		4B6F537C1D7421790015DBF0 /* kkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B6F53781D7421790015DBF0 /* kkbox.png */; };
+		4B6F537D1D7421790015DBF0 /* soundcloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B6F53791D7421790015DBF0 /* soundcloud.png */; };
+		4B6F537E1D7421790015DBF0 /* spotify.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B6F537A1D7421790015DBF0 /* spotify.png */; };
+		4B6F53811D74265C0015DBF0 /* SlideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6F53801D74265C0015DBF0 /* SlideCell.swift */; };
 		CC783908A17F3611176DD465 /* Pods_LearningSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3FDF47C2F08778C87F9C9B0 /* Pods_LearningSwift.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +40,11 @@
 		4B62BF7F1D6C01F2000D2744 /* GridMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GridMenuViewController.swift; path = Showcases/GridMenuViewController.swift; sourceTree = "<group>"; };
 		4B62BF811D6C0275000D2744 /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuButton.swift; path = Views/MenuButton.swift; sourceTree = "<group>"; };
 		4B6F53731D6EF0EE0015DBF0 /* WSwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WSwipeViewController.swift; path = Showcases/WSwipeViewController.swift; sourceTree = "<group>"; };
+		4B6F53771D7421790015DBF0 /* 8track.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 8track.png; path = Resources/8track.png; sourceTree = "<group>"; };
+		4B6F53781D7421790015DBF0 /* kkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kkbox.png; path = Resources/kkbox.png; sourceTree = "<group>"; };
+		4B6F53791D7421790015DBF0 /* soundcloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = soundcloud.png; path = Resources/soundcloud.png; sourceTree = "<group>"; };
+		4B6F537A1D7421790015DBF0 /* spotify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spotify.png; path = Resources/spotify.png; sourceTree = "<group>"; };
+		4B6F53801D74265C0015DBF0 /* SlideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlideCell.swift; path = Views/SlideCell.swift; sourceTree = "<group>"; };
 		53C562858323F54A83E743D4 /* Pods-LearningSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearningSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-LearningSwift/Pods-LearningSwift.release.xcconfig"; sourceTree = "<group>"; };
 		E3FDF47C2F08778C87F9C9B0 /* Pods_LearningSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LearningSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBDB471535F6D4A56046B4DE /* Pods-LearningSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearningSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LearningSwift/Pods-LearningSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,6 +98,7 @@
 				4B62BF7C1D6BE87B000D2744 /* Animators */,
 				4B62BF831D6C0279000D2744 /* Views */,
 				4B62BF791D6AFBBB000D2744 /* Showcases */,
+				4B6F537F1D74217E0015DBF0 /* Resources */,
 				4B62BF681D6AE633000D2744 /* Assets.xcassets */,
 				4B62BF6A1D6AE633000D2744 /* LaunchScreen.storyboard */,
 				4B62BF6D1D6AE633000D2744 /* Info.plist */,
@@ -117,9 +128,21 @@
 		4B62BF831D6C0279000D2744 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4B6F53801D74265C0015DBF0 /* SlideCell.swift */,
 				4B62BF811D6C0275000D2744 /* MenuButton.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		4B6F537F1D74217E0015DBF0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4B6F53771D7421790015DBF0 /* 8track.png */,
+				4B6F53781D7421790015DBF0 /* kkbox.png */,
+				4B6F53791D7421790015DBF0 /* soundcloud.png */,
+				4B6F537A1D7421790015DBF0 /* spotify.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		87CA5D5B6E3F22069FAE9408 /* Frameworks */ = {
@@ -193,6 +216,10 @@
 			files = (
 				4B62BF6C1D6AE633000D2744 /* LaunchScreen.storyboard in Resources */,
 				4B62BF691D6AE633000D2744 /* Assets.xcassets in Resources */,
+				4B6F537E1D7421790015DBF0 /* spotify.png in Resources */,
+				4B6F537D1D7421790015DBF0 /* soundcloud.png in Resources */,
+				4B6F537B1D7421790015DBF0 /* 8track.png in Resources */,
+				4B6F537C1D7421790015DBF0 /* kkbox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +285,7 @@
 				4B62BF821D6C0275000D2744 /* MenuButton.swift in Sources */,
 				4B6F53741D6EF0EE0015DBF0 /* WSwipeViewController.swift in Sources */,
 				4B62BF761D6AF587000D2744 /* ListTableViewCell.swift in Sources */,
+				4B6F53811D74265C0015DBF0 /* SlideCell.swift in Sources */,
 				4B62BF7E1D6BF1B6000D2744 /* PopAnimator.swift in Sources */,
 				4B62BF7B1D6BE877000D2744 /* PushAnimator.swift in Sources */,
 			);
