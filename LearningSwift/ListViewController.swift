@@ -45,7 +45,8 @@ class ListViewController: UITableViewController, UINavigationControllerDelegate 
     func configureTableView() {
         self.items = [
             ["OAO", OAOViewController.self],
-            ["Grid Menu", GridMenuViewController.self]
+            ["Grid Menu", GridMenuViewController.self],
+            ["W Swipe", WSwipeViewController.self]
         ];
 
         self.tableView.registerClass(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier())

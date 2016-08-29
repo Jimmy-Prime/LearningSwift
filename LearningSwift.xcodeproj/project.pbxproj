@@ -17,6 +17,7 @@
 		4B62BF7E1D6BF1B6000D2744 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B62BF7D1D6BF1B6000D2744 /* PopAnimator.swift */; };
 		4B62BF801D6C01F2000D2744 /* GridMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B62BF7F1D6C01F2000D2744 /* GridMenuViewController.swift */; };
 		4B62BF821D6C0275000D2744 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B62BF811D6C0275000D2744 /* MenuButton.swift */; };
+		4B6F53741D6EF0EE0015DBF0 /* WSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6F53731D6EF0EE0015DBF0 /* WSwipeViewController.swift */; };
 		CC783908A17F3611176DD465 /* Pods_LearningSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3FDF47C2F08778C87F9C9B0 /* Pods_LearningSwift.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		4B62BF7D1D6BF1B6000D2744 /* PopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopAnimator.swift; path = Animators/PopAnimator.swift; sourceTree = "<group>"; };
 		4B62BF7F1D6C01F2000D2744 /* GridMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GridMenuViewController.swift; path = Showcases/GridMenuViewController.swift; sourceTree = "<group>"; };
 		4B62BF811D6C0275000D2744 /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuButton.swift; path = Views/MenuButton.swift; sourceTree = "<group>"; };
+		4B6F53731D6EF0EE0015DBF0 /* WSwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WSwipeViewController.swift; path = Showcases/WSwipeViewController.swift; sourceTree = "<group>"; };
 		53C562858323F54A83E743D4 /* Pods-LearningSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearningSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-LearningSwift/Pods-LearningSwift.release.xcconfig"; sourceTree = "<group>"; };
 		E3FDF47C2F08778C87F9C9B0 /* Pods_LearningSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LearningSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBDB471535F6D4A56046B4DE /* Pods-LearningSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearningSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LearningSwift/Pods-LearningSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				4B62BF771D6AFBB7000D2744 /* OAOViewController.swift */,
 				4B62BF7F1D6C01F2000D2744 /* GridMenuViewController.swift */,
+				4B6F53731D6EF0EE0015DBF0 /* WSwipeViewController.swift */,
 			);
 			name = Showcases;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				4B62BF621D6AE633000D2744 /* AppDelegate.swift in Sources */,
 				4B62BF741D6AEB8B000D2744 /* ListViewController.swift in Sources */,
 				4B62BF821D6C0275000D2744 /* MenuButton.swift in Sources */,
+				4B6F53741D6EF0EE0015DBF0 /* WSwipeViewController.swift in Sources */,
 				4B62BF761D6AF587000D2744 /* ListTableViewCell.swift in Sources */,
 				4B62BF7E1D6BF1B6000D2744 /* PopAnimator.swift in Sources */,
 				4B62BF7B1D6BE877000D2744 /* PushAnimator.swift in Sources */,

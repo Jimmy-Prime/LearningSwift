@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-        srand(arc4random())
+        srand48(Int(arc4random_uniform(UInt32(Int.max))))
 
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
 
