@@ -77,6 +77,8 @@ class TableSelectionViewController: UIViewController, UITableViewDataSource, UIT
         let selectionFrame = POPSpringAnimation(propertyNamed: kPOPViewFrame)
 
         if swipe.direction == .Left {
+            selection.rowHeight = SongCell.height()
+
             var frame = selection.frame
             frame.origin.x = self.view.frame.size.width - width
             selectionFrame.toValue = NSValue(CGRect: frame)
@@ -91,10 +93,27 @@ class TableSelectionViewController: UIViewController, UITableViewDataSource, UIT
 
             frame.origin.x = width
             selectionFrame.toValue = NSValue(CGRect: frame)
+
+            selection.rowHeight = 44.0
         }
 
         list.pop_addAnimation(listFrame, forKey: "Frame")
         selection.pop_addAnimation(selectionFrame, forKey: "Frame")
+
+        selection.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+    }
+
+    func findIndex(index: Int) -> Int {
+        var target: Int = 0
+        for i in 0 ... songs.count-1 {
+            let song = songs[i]
+            target = i
+            if song.order > index {
+                break
+            }
+        }
+
+        return target
     }
 
 // MARK: - UITableViewDataSource
@@ -127,7 +146,8 @@ class TableSelectionViewController: UIViewController, UITableViewDataSource, UIT
             selections.append(songs.removeAtIndex(indexPath.row))
         }
         else {
-
+            let song = selections.removeAtIndex(indexPath.row)
+            songs.insert(song, atIndex: findIndex(song.order))
         }
 
         list.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
