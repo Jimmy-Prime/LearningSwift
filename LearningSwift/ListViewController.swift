@@ -22,7 +22,7 @@ class ListViewController: UITableViewController, UINavigationControllerDelegate 
 
 // MARK: - Private Helper
     func configureTitleView() {
-        self.title = "Prime Showcase"
+        self.title = "Prime"
 
         let titleLabel = UILabel()
         titleLabel.font = UIFont(name: "Avenir-Heavy", size: 20)
@@ -32,9 +32,6 @@ class ListViewController: UITableViewController, UINavigationControllerDelegate 
         let attributedString = NSMutableAttributedString(string: self.title!)
         attributedString.addAttributes([NSForegroundColorAttributeName : UIColor.redColor()], range: NSMakeRange(2, 1))
         attributedString.addAttributes([NSForegroundColorAttributeName : UIColor.redColor()], range: NSMakeRange(4, 1))
-        attributedString.addAttributes([NSForegroundColorAttributeName : UIColor.redColor()], range: NSMakeRange(8, 1))
-        attributedString.addAttributes([NSForegroundColorAttributeName : UIColor.redColor()], range: NSMakeRange(11, 1))
-        attributedString.addAttributes([NSForegroundColorAttributeName : UIColor.redColor()], range: NSMakeRange(13, 1))
 
         titleLabel.attributedText = attributedString
         titleLabel.sizeToFit()
@@ -47,7 +44,8 @@ class ListViewController: UITableViewController, UINavigationControllerDelegate 
             ["OAO", OAOViewController.self],
             ["Grid Menu", GridMenuViewController.self],
             ["W Swipe", WSwipeViewController.self],
-            ["Player", PlayerViewController.self]
+            ["Player", PlayerViewController.self],
+            ["Table Selection", TableSelectionViewController.self]
         ];
 
         self.tableView.registerClass(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier())
