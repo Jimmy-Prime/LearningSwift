@@ -107,9 +107,12 @@ class TableSelectionViewController: UIViewController, UITableViewDataSource, UIT
         var target: Int = 0
         for i in 0 ... songs.count-1 {
             let song = songs[i]
-            target = i
             if song.order > index {
+                target = i
                 break
+            }
+            else {
+                target = i + 1
             }
         }
 
