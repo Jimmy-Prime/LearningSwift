@@ -147,13 +147,22 @@ class TableSelectionViewController: UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView == list {
             selections.append(songs.removeAtIndex(indexPath.row))
+
+            list.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+
+            var selectionIndexPath = NSIndexPath(index: 0)
+            selectionIndexPath = selectionIndexPath.indexPathByAddingIndex(selections.count-1)
+            selection.insertRowsAtIndexPaths([selectionIndexPath], withRowAnimation: .Automatic)
         }
         else {
             let song = selections.removeAtIndex(indexPath.row)
             songs.insert(song, atIndex: findIndex(song.order))
-        }
 
-        list.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
-        selection.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+            selection.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+
+            var listIndexPath = NSIndexPath(index: 0)
+            listIndexPath = listIndexPath.indexPathByAddingIndex(findIndex(song.order) - 1)
+            list.insertRowsAtIndexPaths([listIndexPath], withRowAnimation: .Automatic)
+        }
     }
 }
