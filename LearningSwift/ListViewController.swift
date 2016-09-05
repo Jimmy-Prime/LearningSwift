@@ -46,7 +46,8 @@ class ListViewController: UITableViewController, UINavigationControllerDelegate 
         self.items = [
             ["OAO", OAOViewController.self],
             ["Grid Menu", GridMenuViewController.self],
-            ["W Swipe", WSwipeViewController.self]
+            ["W Swipe", WSwipeViewController.self],
+            ["Player", PlayerViewController.self]
         ];
 
         self.tableView.registerClass(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier())

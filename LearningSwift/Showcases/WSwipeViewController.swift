@@ -74,7 +74,7 @@ class WSwipeViewController: UIViewController {
             view.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
             self.view.addSubview(view)
 
-            let index = Int(arc4random_uniform(UInt32(Int.max))) % self.names.count
+            let index: NSInteger = NSInteger(arc4random_uniform(UInt32(self.names.count)))
             view.tag = index
 
             let image = UIImageView(image: UIImage(named: names[index]))
