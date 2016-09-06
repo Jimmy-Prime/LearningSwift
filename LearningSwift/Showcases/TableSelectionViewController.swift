@@ -43,6 +43,7 @@ class TableSelectionViewController: UIViewController, UITableViewDataSource, UIT
         selection.dataSource = self
         selection.delegate = self
         selection.showsVerticalScrollIndicator = false
+        selection.rowHeight = 44.0
         selection.layer.shadowColor = UIColor.blackColor().CGColor
         selection.layer.shadowRadius = 10.0
         selection.layer.shadowOpacity = 0.8
@@ -103,6 +104,7 @@ class TableSelectionViewController: UIViewController, UITableViewDataSource, UIT
         selection.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
     }
 
+// MARK: - Helper
     func findIndex(index: Int) -> Int {
         var target: Int = 0
         for i in 0 ... songs.count-1 {
@@ -117,6 +119,22 @@ class TableSelectionViewController: UIViewController, UITableViewDataSource, UIT
         }
 
         return target
+    }
+
+    func snapshotView(view: UIView) -> UIImage {
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+
+    func rectOfRow(row: Int, inTableView tableView: UITableView) -> CGRect {
+        var frame = CGRectMake(0, 0, tableView.frame.size.width, tableView.rowHeight)
+
+        frame = CGRectOffset(frame, tableView.frame.origin.x, -tableView.contentOffset.y + tableView.rowHeight * CGFloat(row) + tableView.frame.origin.y)
+
+        return frame
     }
 
 // MARK: - UITableViewDataSource
@@ -145,24 +163,54 @@ class TableSelectionViewController: UIViewController, UITableViewDataSource, UIT
 
 // MARK: - UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        let flyingCell = UIImageView(image: snapshotView(cell))
+        let cellFrameInSelf = rectOfRow(indexPath.row, inTableView: tableView)
+        flyingCell.frame = cellFrameInSelf
+
         if tableView == list {
             selections.append(songs.removeAtIndex(indexPath.row))
 
-            list.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            self.view.addSubview(flyingCell)
+            cell.alpha = 0.0
 
-            var selectionIndexPath = NSIndexPath(index: 0)
-            selectionIndexPath = selectionIndexPath.indexPathByAddingIndex(selections.count-1)
-            selection.insertRowsAtIndexPaths([selectionIndexPath], withRowAnimation: .Automatic)
+            let frameAnimation = POPBasicAnimation(propertyNamed: kPOPViewFrame)
+            frameAnimation.toValue = NSValue(CGRect: rectOfRow(selections.count - 1, inTableView: selection))
+            flyingCell.pop_addAnimation(frameAnimation, forKey: "Frame")
+
+            frameAnimation.completionBlock = {(animation, finished) in
+                self.list.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+
+                var selectionIndexPath = NSIndexPath(index: 0)
+                selectionIndexPath = selectionIndexPath.indexPathByAddingIndex(self.selections.count-1)
+                self.selection.insertRowsAtIndexPaths([selectionIndexPath], withRowAnimation: .None)
+
+                flyingCell.removeFromSuperview()
+            }
         }
         else {
             let song = selections.removeAtIndex(indexPath.row)
-            songs.insert(song, atIndex: findIndex(song.order))
+            let newIndex = findIndex(song.order)
+            songs.insert(song, atIndex: newIndex)
 
-            selection.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            self.view.addSubview(flyingCell)
+            cell.alpha = 0.0
 
-            var listIndexPath = NSIndexPath(index: 0)
-            listIndexPath = listIndexPath.indexPathByAddingIndex(findIndex(song.order) - 1)
-            list.insertRowsAtIndexPaths([listIndexPath], withRowAnimation: .Automatic)
+            let frameAnimation = POPBasicAnimation(propertyNamed: kPOPViewFrame)
+            frameAnimation.toValue = NSValue(CGRect: rectOfRow(newIndex, inTableView: list))
+            flyingCell.pop_addAnimation(frameAnimation, forKey: "Frame")
+
+            frameAnimation.completionBlock = {(animation, finished) in
+                self.selection.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+
+                var listIndexPath = NSIndexPath(index: 0)
+                listIndexPath = listIndexPath.indexPathByAddingIndex(newIndex)
+                self.list.insertRowsAtIndexPaths([listIndexPath], withRowAnimation: .None)
+
+                flyingCell.removeFromSuperview()
+            }
         }
     }
 }
