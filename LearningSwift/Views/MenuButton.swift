@@ -81,7 +81,7 @@ class MenuButton: UIButton {
             let downCenter = POPSpringAnimation(propertyNamed: kPOPViewCenter)
             let downRotate = POPSpringAnimation(propertyNamed: kPOPLayerRotation)
 
-            if popped == true {
+            if popped {
                 rotate.toValue = M_PI
                 upCenter.toValue = NSValue(CGPoint: CGPointMake(self.frame.size.width / 2.0, self.frame.size.height * 0.5))
                 upRotate.toValue = M_PI_4

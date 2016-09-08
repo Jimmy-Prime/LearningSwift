@@ -45,7 +45,8 @@ class ListViewController: UITableViewController, UINavigationControllerDelegate 
             ["Grid Menu", GridMenuViewController.self],
             ["W Swipe", WSwipeViewController.self],
             ["Player", PlayerViewController.self],
-            ["Table Selection", TableSelectionViewController.self]
+            ["Table Selection", TableSelectionViewController.self],
+            ["Switch", SwitchViewController.self]
         ];
 
         self.tableView.registerClass(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier())
